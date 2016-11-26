@@ -27,10 +27,22 @@ var Scrabble = function() {
   }
 };
 
+var ValidWordLength = function(word) {
+  if (word == "") {
+    console.log( "That's an empty string, dummy." );
+    return false;
+  } else if (word.length > 7) {
+    console.log( word + " is too long for this game." );
+    return false;
+  } else {
+    return true;
+  };
+};
+
 Scrabble.prototype.score = function(word) {
   this.word = word;
   this.points = 0
-  if ( Scrabble().ValidWordLength(this.word) ) {
+  if ( ValidWordLength(this.word) ) {
     parseWord(this.word).forEach(function(letter) {
       this.points += letterPoints(letter);
     });
@@ -41,18 +53,6 @@ Scrabble.prototype.score = function(word) {
     this.points += 50;
   }
   return this.points;
-};
-
-Scrabble.prototype.ValidWordLength = function(word) {
-  if (word == "") {
-    console.log( "That's an empty string, dummy." );
-    return false;
-  } else if (word.length > 7) {
-    console.log( word + " is too long for this game." );
-    return false;
-  } else {
-    return true;
-  };
 };
 
 Scrabble.prototype.highestScoreFrom = function( array ) {
@@ -72,16 +72,17 @@ Scrabble.prototype.highestScoreFrom = function( array ) {
 };
 
 var Player = function(name) {
-  this.name = name,
-  this.plays = [], //if i'm defining the array here then why does it say it's undefined when I try to push it in??
-  this.playerWon = false,
-  this.totalScore = 0
+  Scrabble.call(this);
+  this.name = name;
+  this.plays = []; //if i'm defining the array here then why does it say it's undefined when I try to push it in??
+  this.playerWon = false;
+  this.totalScore = 0;
 };
 
 Player.prototype.play = function(word) {
     if ( this.playerWon ) {return console.log("You've already won. Why are you still playing??");}
     this.plays.push(word)
-    return new Scrabble().score(word)
+    return (new Scrabble()).score(word)
 };
 
   // totalScore = function() {
@@ -112,7 +113,7 @@ module.exports = Scrabble;
 var newGame = new Scrabble();
 // newGame[score('')];
 // newGame[score("one")]
-// newGame[score("poOp")]
+console.log(newGame.score("poOp"));
 // newGame[score("po&")]
 
 var Miriam = new Player("Miriam");
