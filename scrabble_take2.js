@@ -74,16 +74,27 @@ var Player = function(playerName) {
   this.arrayOfWords = []
   this.playerTotalScore = 0
 }
+
 Player.prototype.name = function () {
   return this.playerName
 };
+
 Player.prototype.plays = function () {
   return this.arrayOfWords
 };
+
 Player.prototype.play = function (word) {
   if ( this.won ) { return false }
 
   return this.arrayOfWords.push(word)
+};
+
+Player.prototype.totalScore = function () {
+  for ( var i=0; i<this.arrayOfWords.length; i++ ) {
+    thisWordsScore = ( new Scrabble() ).score(this.arrayOfWords[i])
+    this.playerTotalScore += thisWordsScore
+  }
+  return this.playerTotalScore
 };
 
 
@@ -94,9 +105,11 @@ console.log(miriam.name()); //Miriam
 console.log(miriam.plays()); //[]
 // play(word): Function which adds the input word to the plays Array
 console.log(miriam.play("poop")); //1
-console.log(miriam.plays()); //["poop"]
+console.log(miriam.play("words")); //2
+console.log(miriam.play("jibb")); //3
+console.log(miriam.plays()); //["poop","words","jibb"]
 // totalScore(): Function which sums up and returns the score of the players words
-
+console.log(miriam.totalScore()); //32
 // hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
 
 // highestScoringWord(): Function which returns the highest scoring word the user has played
