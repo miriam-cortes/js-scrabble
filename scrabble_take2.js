@@ -54,16 +54,51 @@ Scrabble.prototype.highestScoreFrom = function (arrayOfWords) {
 };
 
 
-
 ///////// TESTING STUFF OUT /////////
-var newGame = new Scrabble()
-// returns the total score value for the given word. The word is input as a string (case insensitive).
-console.log(newGame.score("poop")); //8
-console.log(newGame.score("fuzz")); //25
-console.log(newGame.score("guzzle")); //25
-//if the top score is tied between multiple words, pick the one with the fewest letters.
-console.log(newGame.highestScoreFrom(["poop", "fuzz","guzzle"])); //fuzz
-//If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles.
-console.log(newGame.highestScoreFrom(["poop", "fuzz","jimjams"])); // jimjams
-//If the there are multiple words that are the same score and same length, pick the first one in supplied list.
-console.log(newGame.highestScoreFrom(["jibb", "jauk","jamb"])); // jibb
+// var newGame = new Scrabble()
+// // returns the total score value for the given word. The word is input as a string (case insensitive).
+// console.log(newGame.score("poop")); //8
+// console.log(newGame.score("fuzz")); //25
+// console.log(newGame.score("guzzle")); //25
+// //if the top score is tied between multiple words, pick the one with the fewest letters.
+// console.log(newGame.highestScoreFrom(["poop", "fuzz","guzzle"])); //fuzz
+// //If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles.
+// console.log(newGame.highestScoreFrom(["poop", "fuzz","jimjams"])); // jimjams
+// //If the there are multiple words that are the same score and same length, pick the first one in supplied list.
+// console.log(newGame.highestScoreFrom(["jibb", "jauk","jamb"])); // jibb
+
+
+var Player = function(playerName) {
+  this.playerName = playerName
+  this.won = false
+  this.arrayOfWords = []
+  this.playerTotalScore = 0
+}
+Player.prototype.name = function () {
+  return this.playerName
+};
+Player.prototype.plays = function () {
+  return this.arrayOfWords
+};
+Player.prototype.play = function (word) {
+  if ( this.won ) { return false }
+
+  return this.arrayOfWords.push(word)
+};
+
+
+var miriam = new Player("Miriam")
+// name: property which returns the value of the player's name
+console.log(miriam.name()); //Miriam
+// plays: property which returns an Array of the words played by the player
+console.log(miriam.plays()); //[]
+// play(word): Function which adds the input word to the plays Array
+console.log(miriam.play("poop")); //1
+console.log(miriam.plays()); //["poop"]
+// totalScore(): Function which sums up and returns the score of the players words
+
+// hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
+
+// highestScoringWord(): Function which returns the highest scoring word the user has played
+
+// highestWordScore(): Function which returns the highestScoringWord score
