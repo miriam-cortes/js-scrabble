@@ -104,6 +104,13 @@ Player.prototype.hasWon = function () {
   return this.won
 };
 
+Player.prototype.highestScoringWord = function () {
+  return ( new Scrabble() ).highestScoreFrom(this.arrayOfWords)
+};
+
+Player.prototype.highestWordScore = function () {
+  return ( new Scrabble() ).score(this.highestScoringWord())
+};
 
 var miriam = new Player("Miriam")
 // name: property which returns the value of the player's name
@@ -125,5 +132,6 @@ console.log(miriam.plays());
 console.log(miriam.totalScore());
 console.log(miriam.hasWon()); //true
 // highestScoringWord(): Function which returns the highest scoring word the user has played
-
+console.log(miriam.highestScoringWord());
 // highestWordScore(): Function which returns the highestScoringWord score
+console.log(miriam.highestWordScore());
